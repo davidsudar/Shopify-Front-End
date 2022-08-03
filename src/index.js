@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 // build shopify client
 const client = Client.buildClient({
   storefrontAccessToken: process.env.REACT_APP_STOREFRONTACCESSTOKEN,
-  domain: process.env.REACT_APP_TEST,
+  domain: process.env.REACT_APP_SHOPIFY_DOMAIN,
 });
 store.dispatch({ type: "CLIENT_CREATED", payload: client });
 
