@@ -5,6 +5,7 @@ import Cart from "./components/shopify/Cart";
 import store from "./store";
 import Main from "./components/Main";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 // import GenericProductsPage from "./components/GenericProductsPage";
 // import Products from "./components/shopify/Products";
 
@@ -52,7 +53,7 @@ class App extends Component {
   render() {
     const state = store.getState(); // state from redux store
     return (
-      <div className="App bg-stone-300 h-screen">
+      <div className="relative bg-stone-300 h-screen">
         <Nav handleCartOpen={this.handleCartOpen}/>
         <Cart
           checkout={state.checkout}
@@ -62,6 +63,7 @@ class App extends Component {
           removeLineItemInCart={this.removeLineItemInCart}
         />
         <Main />
+        <Footer/>
       </div>
     );
   }

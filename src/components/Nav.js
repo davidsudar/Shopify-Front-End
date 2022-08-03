@@ -7,7 +7,7 @@ import LogoMobile from "../Assets/Logo-White.png";
 import Logo from "../Assets/Logo-Name-White.png";
 
 const navigation = [
-  { name: "Sizing Guide", href: "/sizing", current: true },
+  { name: "Sizing Guide", href: "/sizing", current: false },
   { name: "FAQ", href: "/faq", current: false },
   { name: "Contact Us", href: "/contact", current: false },
 ];
@@ -18,10 +18,10 @@ function classNames(...classes) {
 
 function setCurrent(name) {
   //Find index of specific object using findIndex method.
-  var objIndex = navigation.findIndex((obj) => obj.name === name);
+  // var objIndex = navigation.findIndex((obj) => obj.name === name);
 
   //Update object's name property.
-  navigation[objIndex].current = true;
+  // navigation[objIndex].current = true;
 }
 
 class Nav extends React.Component {
