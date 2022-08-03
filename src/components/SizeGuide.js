@@ -1,88 +1,112 @@
-const sizing = [
-    { Size: "XS", Chest: "82", Waist: "64", Hip: "/sizing", Length: "/sizing"},
-    { Size: "S", Chest: "/sizing", Waist: "/sizing", Hip: "/sizing", Length: "/sizing"},
-    { Size: "M", Chest: "/sizing", Waist: "/sizing", Hip: "/sizing", Length: "/sizing"},
-    { Size: "L", Chest: "/sizing", Waist: "/sizing", Hip: "/sizing", Length: "/sizing"},
-    { Size: "XL", Chest: "/sizing", Waist: "/sizing", Hip: "/sizing", Length: "/sizing"},
-  ];
+import React, { useState } from "react";
+import HowToMeasureModal from "./HowToMeasureModal";
 
-const SizeGuide = () => (
+const tshirt = [
+  { Size: "XS", ChestIn: "82", ChestCm: "64", AusSize: "6-8" },
+  { Size: "S", ChestIn: "84", ChestCm: "66", AusSize: "8-10" },
+  { Size: "M", ChestIn: "86", ChestCm: "68", AusSize: "10-12" },
+  { Size: "L", ChestIn: "88", ChestCm: "70", AusSize: "12-14" },
+  { Size: "XL", ChestIn: "90", ChestCm: "72", AusSize: "14-16" },
+];
 
-    
+// const leggings = [
+//     { Size: "XS", ChestIn: "82", ChestCm: "64", AusSize: "6-8" },
+//     { Size: "S", ChestIn: "84", ChestCm: "66", AusSize: "8-10" },
+//     { Size: "M", ChestIn: "86", ChestCm: "68", AusSize: "10-12" },
+//     { Size: "L", ChestIn: "88", ChestCm: "70", AusSize: "12-14" },
+//     { Size: "XL", ChestIn: "90", ChestCm: "72", AusSize: "14-16" },
+//   ];
 
-<div class="overflow-x-auto relative">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="py-3 px-6">
+export default function SizeGuide() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
+      <div className="p-8">
+        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 pt-4 overflow-x-auto">
+          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <table className="min-w-full leading-normal">
+              <thead>
+                <tr className=" bg-stone-200">
+                  <th
+                    scope="col"
+                    className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                  ></th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                  ></th>
+                  <th
+                    scope="col"
+                    colSpan="2"
+                    className="text-center px-5 py-3  border border-gray-200 text-gray-800 text-sm uppercase font-normal"
+                  >
+                    Chest
+                  </th>
+                </tr>
+                <tr className=" bg-stone-200">
+                  <th
+                    scope="col"
+                    className="px-5 py-3   border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                  >
                     Size
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Chest(cm)
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Waist
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Hip
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Length
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        {sizing.map((item) => (
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {item.Size}
-                </th>
-                <td class="py-4 px-6">
-                {item.Chest}
-                </td>
-                <td class="py-4 px-6">
-                {item.Waist}
-                </td>
-                <td class="py-4 px-6">
-                    ${item.Hip}
-                </td>
-                <td class="py-4 px-6">
-                    ${item.Length}
-                </td>
-            </tr>
-        ))}
-            
-            {/* <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td class="py-4 px-6">
-                    White
-                </td>
-                <td class="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td class="py-4 px-6">
-                    $1999
-                </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td class="py-4 px-6">
-                    Black
-                </td>
-                <td class="py-4 px-6">
-                    Accessories
-                </td>
-                <td class="py-4 px-6">
-                    $99
-                </td>
-            </tr> */}
-        </tbody>
-    </table>
-</div>
-);
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                  >
+                    AUS
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3   border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                  >
+                    Inches
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3   border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                  >
+                    CM
+                  </th>
+                </tr>
+              </thead>
+              <tbody className=" bg-stone-100">
+                {tshirt.map((item) => (
+                  <tr className="text-center" key={item.Size + "-tshirt"}>
+                    <td className="px-5 py-5 border-b border-gray-200  text-sm bold">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {item.Size}
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {item.AusSize}
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {item.ChestIn}
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {item.ChestCm}
+                      </p>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <button className="underline text-xs" onClick={() => setIsOpen(true)}>
+            How To Measure
+          </button>
+        </div>
+      </div>
+      <HowToMeasureModal isOpen={isOpen} setIsOpen={setIsOpen} />
+    </div>
+  );
+}
 
-export default SizeGuide;
+// export default SizeGuide;
