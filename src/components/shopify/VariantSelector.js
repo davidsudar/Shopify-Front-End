@@ -15,6 +15,7 @@ class VariantSelector extends Component {
           )
         })}
       </select>
+      
     );
   }
 }

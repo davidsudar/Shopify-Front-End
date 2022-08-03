@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -18,7 +18,9 @@ store.dispatch({ type: "CLIENT_CREATED", payload: client });
 
 // buildClient() is synchronous, so we can call all these after!
 client.product.fetchAll().then((res) => {
+  
   store.dispatch({ type: "PRODUCTS_FOUND", payload: res });
+  console.log(res)
 });
 client.checkout.create().then((res) => {
   store.dispatch({ type: "CHECKOUT_FOUND", payload: res });
@@ -27,14 +29,14 @@ client.shop.fetchInfo().then((res) => {
   store.dispatch({ type: "SHOP_FOUND", payload: res });
 });
 
-
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
   </BrowserRouter>,
-  document.getElementById("root")
+  // document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

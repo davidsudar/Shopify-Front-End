@@ -1,5 +1,5 @@
 const Footer = () => (
-    <footer className=" text-white bg-gray-800 p-8 absolute b-0 w-screen">
+    <footer className=" text-white bg-gray-800 p-8 w-screen">
 
       <div className="flex justify-center ">
         <a href="#!" className="mr-9 text-white-800">
@@ -8,7 +8,7 @@ const Footer = () => (
             focusable="false"
             data-prefix="fab"
             data-icon="facebook-f"
-            class="svg-inline--fa fa-facebook-f w-2.5"
+            className="svg-inline--fa fa-facebook-f w-2.5"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 320 512"
@@ -25,7 +25,7 @@ const Footer = () => (
             focusable="false"
             data-prefix="fab"
             data-icon="twitter"
-            class="svg-inline--fa fa-twitter w-4"
+            className="svg-inline--fa fa-twitter w-4"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -42,7 +42,7 @@ const Footer = () => (
             focusable="false"
             data-prefix="fab"
             data-icon="instagram"
-            class="svg-inline--fa fa-instagram w-3.5"
+            className="svg-inline--fa fa-instagram w-3.5"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"

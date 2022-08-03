@@ -21,7 +21,7 @@ class Products extends Component {
     }
     products.reverse(); // CHFE 2018.10.15 - this makes it so the products are shown newest to oldest on first load
     return (
-      <div className="flex flex-wrap justify-center">
+      <div>
         {products}
       </div>
     );

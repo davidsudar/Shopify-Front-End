@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import VariantSelector from "./VariantSelector";
+import VariantSelector from "./VariantSelector";
 
 // constants
 // const ONE_SIZE_FITS_MOST = "One Size Fits Most";
@@ -56,62 +56,104 @@ class Product extends Component {
     let variantImage =
       this.state.selectedVariantImage || this.props.product.images[0];
     let variant = this.state.selectedVariant || this.props.product.variants[0];
-    let variantQuantity = this.state.selectedVariantQuantity || 1;
-    // let variantSelectors = this.props.product.options.map((option) => {
-    //   aOptionNames.push(option.name);
+
+    // let oVariantTypes = this.props.products.map((product) => {
     //   return (
-    //     <VariantSelector
-    //       handleOptionChange={this.handleOptionChange}
-    //       key={option.id.toString()}
-    //       option={option}
+    //     <label className="text-center">
+    //     <input
+    //       type="radio"
+    //       className="w-6 h-6 flex items-center justify-center bg-gray-100 dark:bg-gray-600 rounded-lg"
+    //       name="color"
+    //       value={product.name}
     //     />
+    //     {product.name}
+    //   </label>
     //   );
     // });
+    // let variantQuantity = this.state.selectedVariantQuantity || 1;
+    // let description = this.props.product.description;
+    let productName = this.props.product.title;
+    
+    let variantSelectors = this.props.product.options.map((option) => {
+      return (
+        <VariantSelector
+          handleOptionChange={this.handleOptionChange}
+          key={option.id.toString()}
+          option={option}
+        />
+      );
+    });
     // let bShowOneSizeFitsMost =
     //   variantSelectors.length === 1 && aOptionNames[0] === "Title";
     return (
-      //       <div className="Product">
-      //         {this.props.product.images.length ? <img src={variantImage.src} alt={`${this.props.product.title} product shot`}/> : null}
-      //         <h5 className="Product__title">{this.props.product.title}</h5>
-      //         <p>${variant.price}</p>
-      //         {bShowOneSizeFitsMost ? <h5 className="Product__title">{ONE_SIZE_FITS_MOST}</h5> : variantSelectors}
-      //         <label className="Product__option">
-      //           Quantity: <input className="form-control" min="1" type="number" defaultValue={variantQuantity} onChange={this.handleQuantityChange}></input>
-      //         </label>
-      //         {/* <button className="Product__buy button" onClick={() => this.props.addVariantToCart(variant.id, variantQuantity)}>Add to Cart</button> */}
-      //         <button className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" onClick={() => this.props.addVariantToCart(variant.id, variantQuantity)}>
+      // <div className="max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 m-8">
+      //   <a href="/#">
+      //     <img
+      //       className="p-8 rounded-t-lg"
+      //       src={variantImage.src}
+      //       alt={this.props.product.title}
+      //     />
+      //   </a>
+      //   <div className="px-5 pb-5">
+      //     <a href="/#">
+      //       <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white mb-5">
+      //         {this.props.product.title}
+      //       </h5>
+      //     </a>
+      //     <div className="flex justify-between items-center">
+      //       <span className="text-3xl font-bold text-gray-900 dark:text-white">
+      //         ${variant.price}
+      //       </span>
+      //       <button
+      //         className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
+      //         onClick={() =>
+      //           this.props.addVariantToCart(variant.id, variantQuantity)
+      //         }
+      //       >
       //         Add to Cart
-      // </button>
-      //       </div>
+      //       </button>
+      //     </div>
+      //   </div>
+      // </div>
 
-      <div className="max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 m-8">
-        <a href="/#">
+      <div className="flex bg-white dark:bg-gray-800 rounded-lg shadow max-w-xl">
+        <div className="flex-none w-24 md:w-48 relative">
           <img
-            className="p-8 rounded-t-lg"
             src={variantImage.src}
-            alt={this.props.product.title}
+            alt={productName}
+            className="absolute rounded-lg inset-0 w-full h-full object-cover"
           />
-        </a>
-        <div className="px-5 pb-5">
-          <a href="/#">
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white mb-5">
-              {this.props.product.title}
-            </h5>
-          </a>
-          <div className="flex justify-between items-center">
-            <span className="text-3xl font-bold text-gray-900 dark:text-white">
+        </div>
+        <form className="flex-auto p-6">
+          <div className="flex flex-wrap">
+            <h1 className="flex-auto text-xl font-semibold dark:text-gray-50">
+              {productName}
+            </h1>
+            <div className="text-xl font-semibold text-gray-500 dark:text-gray-300">
               ${variant.price}
-            </span>
-            <button
-              className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
-              onClick={() =>
-                this.props.addVariantToCart(variant.id, variantQuantity)
-              }
+            </div>
+            <div className="w-full flex-none text-sm font-medium text-gray-500 dark:text-gray-300 mt-2">
+              {variant.available ? "In Stock" : "Sold Out"}
+            </div>
+          </div>
+          <div className="flex items-baseline mt-4 mb-6 text-gray-700 dark:text-gray-300">
+            <div className="space-x-2 flex">{variantSelectors}</div>
+            <a
+              href="/#"
+              className="ml-auto hidden md:block text-sm text-gray-500 dark:text-gray-300 underline"
             >
-              Add to Cart
+              Size Guide
+            </a>
+          </div>
+          <div className="flex mb-4 text-sm font-medium">
+            <button
+              type="button"
+              className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+            >
+              Buy now
             </button>
           </div>
-        </div>
+        </form>
       </div>
     );
   }

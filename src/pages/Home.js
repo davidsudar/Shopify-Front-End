@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 // import Products from "./components/shopify/Products";
 
 const Home = () => (
-  <div className="home">
+  <div >
     <Hero/>
     <GenericProductsPage />
   </div>

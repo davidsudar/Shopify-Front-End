@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
 import { connect } from "react-redux";
 import Cart from "./components/shopify/Cart";
 import store from "./store";
 import Main from "./components/Main";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-// import GenericProductsPage from "./components/GenericProductsPage";
-// import Products from "./components/shopify/Products";
 
 class App extends Component {
   constructor() {
@@ -53,7 +50,7 @@ class App extends Component {
   render() {
     const state = store.getState(); // state from redux store
     return (
-      <div className="relative bg-stone-300 h-screen">
+      <div className="bg-stone-300 min-h-screen">
         <Nav handleCartOpen={this.handleCartOpen}/>
         <Cart
           checkout={state.checkout}
@@ -63,7 +60,7 @@ class App extends Component {
           removeLineItemInCart={this.removeLineItemInCart}
         />
         <Main />
-        <Footer/>
+          <Footer />
       </div>
     );
   }

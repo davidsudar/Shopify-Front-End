@@ -2,27 +2,20 @@ import React from "react";
 import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon, ShoppingCartIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import LogoMobile from "../Assets/Logo-White.png";
 import Logo from "../Assets/Logo-Name-White.png";
+// import DarkModeToggle from "./DarkModeToggle";
 
 const navigation = [
-  { name: "Sizing Guide", href: "/sizing", current: false },
-  { name: "FAQ", href: "/faq", current: false },
-  { name: "Contact Us", href: "/contact", current: false },
+  { name: "Sizing Guide", href: "/sizing"},
+  { name: "FAQ", href: "/faq"},
+  { name: "Contact Us", href: "/contact"},
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-function setCurrent(name) {
-  //Find index of specific object using findIndex method.
-  // var objIndex = navigation.findIndex((obj) => obj.name === name);
-
-  //Update object's name property.
-  // navigation[objIndex].current = true;
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
 class Nav extends React.Component {
   render() {
@@ -45,7 +38,7 @@ class Nav extends React.Component {
                 </div>
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link to="/">
+                    <NavLink to="/">
                       <img
                         className="block lg:hidden h-8 w-auto"
                         src={LogoMobile}
@@ -56,26 +49,30 @@ class Nav extends React.Component {
                         src={Logo}
                         alt="Workflow"
                       />
-                    </Link>
+                    </NavLink>
                   </div>
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
-                        <Link
+                        <NavLink
                           key={item.name}
                           to={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "px-3 py-2 rounded-md text-sm font-medium"
-                          )}
+                          // className={classNames(
+                          //   item.current
+                          //     ? "bg-gray-900 text-white"
+                          //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          //   "px-3 py-2 rounded-md text-sm font-medium"
+                          // )}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                          }
                           aria-current={item.current ? "page" : undefined}
-                          onClick={setCurrent(item.name)}
                         >
                           {" "}
                           {item.name}{" "}
-                        </Link>
+                        </NavLink>
                       ))}
                     </div>
                   </div>
@@ -88,29 +85,35 @@ class Nav extends React.Component {
                   >
                     <span className="sr-only">View notifications</span>
                     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                    
                   </button>
                 </div>
+                {/* <DarkModeToggle /> */}
               </div>
             </div>
 
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <Link
+                  <NavLink
                     key={item.name}
                     to={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
-                    )}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    }
+                    // className={classNames(
+                    //   item.current
+                    //     ? "bg-gray-900 text-white"
+                    //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    //   "block px-3 py-2 rounded-md text-base font-medium"
+                    // )}
                     aria-current={item.current ? "page" : undefined}
-                    onClick={setCurrent(item.name)}
                   >
                     {" "}
                     {item.name}{" "}
-                  </Link>
+                  </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>

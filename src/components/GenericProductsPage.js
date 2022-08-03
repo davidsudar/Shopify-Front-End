@@ -30,7 +30,7 @@ class GenericProductsPage extends React.Component {
         addVariantToCart={this.addVariantToCart}
       />
     );
-    return <div>{oProducts}</div>;
+    return <div className="flex felx-wrap">{oProducts}</div>;
   }
 }
 
