@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import VariantSelector from "./VariantSelector";
+// import VariantSelector from "./VariantSelector";
 // import { ShoppingBagIcon } from "@heroicons/react/outline";
 
 // constants
@@ -75,15 +75,15 @@ class Product extends Component {
     let productName = this.props.product.title;
     let productId = this.props.product.id;
 
-    let variantSelectors = this.props.product.options.map((option) => {
-      return (
-        <VariantSelector
-          handleOptionChange={this.handleOptionChange}
-          key={option.id.toString()}
-          option={option}
-        />
-      );
-    });
+    // let variantSelectors = this.props.product.options.map((option) => {
+    //   return (
+    //     <VariantSelector
+    //       handleOptionChange={this.handleOptionChange}
+    //       key={option.id.toString()}
+    //       option={option}
+    //     />
+    //   );
+    // });
     // let bShowOneSizeFitsMost =
     //   variantSelectors.length === 1 && aOptionNames[0] === "Title";
     return (
@@ -106,7 +106,7 @@ class Product extends Component {
                 {productName}
               </a>
             </h3>
-            <p className="mt-1 text-gray-900">{variant.price}</p>
+            <p className="mt-1 text-gray-900">${variant.price}</p>
           </div>
         </div>
         {/* figure out why flex isn't working */}
