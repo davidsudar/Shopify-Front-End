@@ -7,6 +7,6 @@ module.exports = {
     //   'sand': '#EEECEC'
     // }
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/aspect-ratio')],
   darkMode: 'class'
 };

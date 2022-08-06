@@ -46,7 +46,7 @@ export default function Promo() {
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h2
             id="sale-heading"
-            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
+            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl uppercase"
           >
             Get 25% off during our opening sale
           </h2>
@@ -65,7 +65,7 @@ export default function Promo() {
       {/* Testimonials */}
       <section
         aria-labelledby="testimonial-heading"
-        className="relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-32 lg:px-8"
+        className="relative max-w-7xl mx-auto pt-12 px-4 sm:px-6 lg:pt-32 lg:px-8"
       >
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h2

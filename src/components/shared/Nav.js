@@ -3,8 +3,8 @@ import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 import { NavLink } from "react-router-dom";
-import LogoMobile from "../Assets/Logo-White.png";
-import Logo from "../Assets/Logo-Name-White.png";
+import LogoMobile from "../../Assets/Logo-White.png";
+import Logo from "../../Assets/Logo-Name-White.png";
 // import DarkModeToggle from "./DarkModeToggle";
 
 const navigation = [
@@ -83,7 +83,7 @@ class Nav extends React.Component {
                     className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     onClick={this.props.handleCartOpen}
                   >
-                    <span className="sr-only">View notifications</span>
+                    <span className="sr-only">View Cart</span>
                     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                     
                   </button>

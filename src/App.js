@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Cart from "./components/shopify/Cart";
 import store from "./store";
-import Main from "./components/Main";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Main from "./components/shared/Main";
+import Nav from "./components/shared/Nav";
+import Footer from "./components/shared/Footer";
 
 class App extends Component {
   constructor() {

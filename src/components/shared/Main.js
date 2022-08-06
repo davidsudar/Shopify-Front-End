@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
-import FAQ from "../pages/FAQ";
-import Contact from "../pages/Contact";
-import Sizing from "../pages/Sizing";
+import Home from "../../pages/Home";
+import FAQ from "../../pages/FAQ";
+import Contact from "../../pages/Contact";
+import Sizing from "../../pages/Sizing";
 
 const Main = () => (
   <Routes>
