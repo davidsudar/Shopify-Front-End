@@ -51,7 +51,7 @@ class App extends Component {
     const state = store.getState(); // state from redux store
     return (
       <div className="bg-stone-300 min-h-screen">
-        <Nav handleCartOpen={this.handleCartOpen}/>
+        <Nav handleCartOpen={this.handleCartOpen} />
         <Cart
           checkout={state.checkout}
           isCartOpen={state.isCartOpen}
@@ -59,19 +59,11 @@ class App extends Component {
           updateQuantityInCart={this.updateQuantityInCart}
           removeLineItemInCart={this.removeLineItemInCart}
         />
-        <Main />
-          <Footer />
+        <Main/>
+        <Footer className=""/>
       </div>
     );
   }
 }
 
 export default connect((state) => state)(App);
-
-
-
-
-
-
-
-

@@ -1,5 +1,5 @@
 const Footer = () => (
-    <footer className=" text-white bg-gray-800 p-8 w-screen bottom-0 absolute">
+    <footer className=" text-white bg-gray-800 p-8 w-screen bottom-0 fixed">
 
       <div className="flex justify-center ">
         <a href="#!" className="mr-9 text-white-800">
