@@ -3,6 +3,7 @@ import Home from "../../pages/Home";
 import FAQ from "../../pages/FAQ";
 import Contact from "../../pages/Contact";
 import Sizing from "../../pages/Sizing";
+import ProductDetail from "../../pages/ProductDetail";
 
 const Main = () => (
   <Routes>
@@ -10,6 +11,8 @@ const Main = () => (
     <Route path="/sizing" element={<Sizing />}></Route>
     <Route path="/faq" element={<FAQ />}></Route>
     <Route path="/contact" element={<Contact />}></Route>
+    <Route path="/details/:id" element={<ProductDetail />}></Route>
+
   </Routes>
 );
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Product from "./Product";
 
+
 class Products extends Component {
   render() {
     let products;

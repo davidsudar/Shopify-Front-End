@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 // import VariantSelector from "./VariantSelector";
 // import { ShoppingBagIcon } from "@heroicons/react/outline";
 
@@ -73,7 +74,8 @@ class Product extends Component {
     // let variantQuantity = this.state.selectedVariantQuantity || 1;
     // let description = this.props.product.description;
     let productName = this.props.product.title;
-    let productId = this.props.product.id;
+    let productId = /[^/]*$/.exec(this.props.product.id)[0];
+    console.log(productId);
 
     // let variantSelectors = this.props.product.options.map((option) => {
     //   return (
@@ -101,10 +103,10 @@ class Product extends Component {
           </div>
           <div className="mt-6">
             <h3 className="mt-1 font-semibold text-gray-900">
-              <a href="/#">
+              <NavLink to={`/details/${productId}`}>
                 <span className="absolute inset-0" />
                 {productName}
-              </a>
+              </NavLink>
             </h3>
             <p className="mt-1 text-gray-900">${variant.price}</p>
           </div>
@@ -115,45 +117,6 @@ class Product extends Component {
           {variantSelectors}
         </ul> */}
       </li>
-      // <div className="flex bg-white dark:bg-gray-800 rounded-lg shadow max-w-xl">
-      //   <div className="flex-none w-24 md:w-48 relative">
-      //     <img
-      //       src={variantImage.src}
-      //       alt={productName}
-      //       className="absolute rounded-lg inset-0 w-full h-full object-cover"
-      //     />
-      //   </div>
-      //   <form className="flex-auto p-6">
-      //     <div className="flex flex-wrap">
-      //       <h1 className="flex-auto text-xl font-semibold dark:text-gray-50">
-      //         {productName}
-      //       </h1>
-      //       <div className="text-xl font-semibold text-gray-500 dark:text-gray-300">
-      //         ${variant.price}
-      //       </div>
-      //       <div className="w-full flex-none text-sm font-medium text-gray-500 dark:text-gray-300 mt-2">
-      //         {variant.available ? "In Stock" : "Sold Out"}
-      //       </div>
-      //     </div>
-      //     <div className="flex items-baseline mt-4 mb-6 text-gray-700 dark:text-gray-300">
-      //       <div className="space-x-2 flex">{variantSelectors}</div>
-      //       <a
-      //         href="/#"
-      //         className="ml-auto hidden md:block text-sm text-gray-500 dark:text-gray-300 underline"
-      //       >
-      //         Size Guide
-      //       </a>
-      //     </div>
-      //     <div className="flex mb-4 text-sm font-medium">
-      //       <button
-      //         type="button"
-      //         className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-      //       >
-      //         Buy now
-      //       </button>
-      //     </div>
-      //   </form>
-      // </div>
     );
   }
 }
