@@ -50,17 +50,19 @@ class App extends Component {
   render() {
     const state = store.getState(); // state from redux store
     return (
-      <div className="bg-stone-300 min-h-screen">
-        <Nav handleCartOpen={this.handleCartOpen} />
-        <Cart
-          checkout={state.checkout}
-          isCartOpen={state.isCartOpen}
-          handleCartClose={this.handleCartClose}
-          updateQuantityInCart={this.updateQuantityInCart}
-          removeLineItemInCart={this.removeLineItemInCart}
-        />
-        <Main/>
-        <Footer className=""/>
+      <div className="relative">
+        <div className="bg-stone-300 min-h-screen">
+          <Nav handleCartOpen={this.handleCartOpen} />
+          <Cart
+            checkout={state.checkout}
+            isCartOpen={state.isCartOpen}
+            handleCartClose={this.handleCartClose}
+            updateQuantityInCart={this.updateQuantityInCart}
+            removeLineItemInCart={this.removeLineItemInCart}
+          />
+          <Main />
+        </div>
+        <Footer className="" />
       </div>
     );
   }
