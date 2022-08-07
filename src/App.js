@@ -51,7 +51,7 @@ class App extends Component {
     const state = store.getState(); // state from redux store
     return (
       <div className="relative">
-        <div className="bg-stone-300 min-h-screen">
+        <div className="bg-stone-300 min-h-screen pb-8">
           <Nav handleCartOpen={this.handleCartOpen} />
           <Cart
             checkout={state.checkout}
