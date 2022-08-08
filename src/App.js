@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Cart from "./components/shopify/Cart";
-import store from "./store";
+import {store} from "./store";
 import Main from "./components/shared/Main";
 import Nav from "./components/shared/Nav";
 import Footer from "./components/shared/Footer";

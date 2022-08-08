@@ -3,7 +3,7 @@ import { RadioGroup } from "@headlessui/react";
 import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/react/outline";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import store from "../store";
+import { store } from "../store";
 
 const product = {
   name: "Basic Tee",

@@ -1,7 +1,7 @@
 import React from "react";
 import Products from "./shopify/Products";
 import { connect } from "react-redux";
-import store from "../store";
+import {store} from "../store";
 
 class GenericProductsPage extends React.Component {
   constructor() {

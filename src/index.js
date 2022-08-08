@@ -5,9 +5,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import Client from "shopify-buy";
 import { Provider } from "react-redux";
-import store from "./store";
 import "./styles/shopify.css";
 import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from 'redux-persist/lib/integration/react';
+
+// import the two exports from the last code snippet.
+import { persistor, store } from './store';
+// import your necessary custom components.
+import  LoadingView  from './components/LoadingView';
 
 // build shopify client
 const client = Client.buildClient({
@@ -32,8 +37,10 @@ client.shop.fetchInfo().then((res) => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Provider store={store}>
+   <Provider store={store}>
+      <PersistGate loading={<LoadingView />} persistor={persistor}>
       <App />
+      </PersistGate>
     </Provider>
   </BrowserRouter>,
   // document.getElementById("root")
