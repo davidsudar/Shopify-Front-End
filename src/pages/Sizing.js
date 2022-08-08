@@ -1,5 +1,5 @@
-import SideBar from "../components/Sidebar";
-import SizeGuide from "../components/SizeGuide";
+import SideBar from "../components/size guide/Sidebar";
+import SizeGuide from "../components/size guide/SizeGuide";
 
 const Sizing = () => (
   <div className="flex justify-between">

@@ -1,5 +1,5 @@
 import { Dialog } from "@headlessui/react";
-import ChestMeasure from "../Assets/Chest Measure.png";
+import ChestMeasure from "../../Assets/Chest Measure.png";
 
 const HowToMeasureModal = ({ isOpen, setIsOpen }) => {
   return (

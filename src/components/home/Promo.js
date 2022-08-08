@@ -1,4 +1,4 @@
-import Banner from "../Assets/banner.png"
+import Banner from "../../Assets/banner.png"
 
 /* This example requires Tailwind CSS v2.0+ */
 

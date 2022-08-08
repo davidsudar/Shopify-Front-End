@@ -83,7 +83,6 @@ function classNames(...classes) {
 }
 
 export default function ProductDetail() {
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const { id } = useParams();
   const state = store.getState(); // state from redux store
   let oProducts = state.products;
@@ -159,6 +158,7 @@ export default function ProductDetail() {
   }
 
   const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [selectedSize, setSelectedSize] = useState(sizes[0]);
 
   return (
     <div className="bg-stone-300">
