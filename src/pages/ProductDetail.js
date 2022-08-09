@@ -2,60 +2,65 @@ import React from "react";
 import { connect } from "react-redux";
 import { RadioGroup } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
-import {store} from "../store";
+import { store } from "../store";
 import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
+  return classes.filter(Boolean).join(" ");
+}
 
 class ProductDetail extends React.Component {
   constructor() {
     super();
     this.addVariantToCart = this.addVariantToCart.bind(this);
-
   }
 
   addVariantToCart(variantId, quantity) {
     const state = store.getState(); // state from redux store
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
     const checkoutId = state.checkout.id;
-    state.client.checkout.addLineItems(checkoutId, lineItemsToAdd)
+    state.client.checkout
+      .addLineItems(checkoutId, lineItemsToAdd)
       .then((res) => {
         store.dispatch({
           type: "ADD_VARIANT_TO_CART",
           payload: { isCartOpen: true, checkout: res },
         });
       });
-
-      // state.client.checkout.create().then((checkout) => {
-      //   console.log(checkout); // Empty checkout
-      //   console.log(checkout.id); // The ID of the checkout. Store this for later usage.
-      // });
   }
 
-
   UpdateSelectedColor = (value) => {
-    const state = store.getState(); 
+    const state = store.getState();
     state.selectedColor = value;
   };
+
+  UpdateSelectedVariant = (product) => {
+    const state = store.getState();
+
+    state.selectedVariant = product.variants.find(
+      (variant) =>
+        variant.selectedOptions[0].value === state.selectedColor.name &&
+        variant.selectedOptions[1].value === state.selectedSize.shopifyName
+    );
+  };
+
   UpdateSelectedSize = (value) => {
-    const state = store.getState(); 
+    const state = store.getState();
     state.selectedSize = value;
+    console.log(state.selectedSize)
+  };
+
+  UpdateSizesStock = () => {
+    return [];
   };
 
   render() {
-
-
-    const state = store.getState(); 
-    console.log(state);
+    const state = store.getState();
 
     let oProducts = state.products;
     const product1 = oProducts.find(
-      (element) =>
-        element.id === "gid://shopify/Product/7771227160801"
+      (element) => element.id === "gid://shopify/Product/7771227160801"
     );
-    console.log(product1);
 
     const product = {
       name: "Basic Tee",
@@ -103,12 +108,12 @@ class ProductDetail extends React.Component {
         },
       ],
       sizes: [
-        { name: "XXS", inStock: true },
-        { name: "XS", inStock: true },
-        { name: "S", inStock: true },
-        { name: "M", inStock: true },
-        { name: "L", inStock: true },
-        { name: "XL", inStock: false },
+        { name: "XXS", inStock: true, shopifyName: "Extra Extra Small" },
+        { name: "XS", inStock: true, shopifyName: "Extra Extra Small" },
+        { name: "S", inStock: true, shopifyName: "Extra Extra Small" },
+        { name: "M", inStock: true, shopifyName: "Extra Extra Small" },
+        { name: "L", inStock: true, shopifyName: "Extra Extra Small" },
+        { name: "XL", inStock: false, shopifyName: "Extra Extra Small" },
       ],
       description: `
           <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
@@ -135,7 +140,9 @@ class ProductDetail extends React.Component {
     ];
 
     const colors = [];
-    const sizes = [];
+    var sizes = [];
+
+    // let variants = product1.variants;
 
     var colorResult = product1.options.find((obj) => {
       return obj.name === "Color";
@@ -194,16 +201,25 @@ class ProductDetail extends React.Component {
           default:
             break;
         }
-        sizes.push({ name: name, inStock: true });
+
+        //get stock for each size and color
+        let inStock = product1.variants.find(
+          (variant) =>
+            variant.selectedOptions[0].value === "Black" &&
+            variant.selectedOptions[1].value === value.value
+        ).available;
+console.log(value.value, inStock);
+
+        sizes.push({ name: name, inStock: inStock, shopifyName: value.value });
       });
     }
 
     state.selectedVariant = product1.variants[0];
     state.selectedColor = colors[0];
     state.selectedSize = sizes[0];
-    
+
     return (
-        <div className="bg-stone-300">
+      <div className="bg-stone-300">
         <div className="pt-6 pb-16 sm:pb-24">
           <div className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
@@ -249,7 +265,11 @@ class ProductDetail extends React.Component {
                     value={state.selectedColor}
                     onChange={(e) => {
                       this.UpdateSelectedColor(e);
-                      console.log(state.selectedColor);
+                      this.UpdateSelectedVariant(product1);
+                      sizes.forEach((size) => {
+                        size.inStock = false;
+                      });
+                      console.log(sizes)
                     }}
                     className="mt-2"
                   >
@@ -302,7 +322,7 @@ class ProductDetail extends React.Component {
                     value={this.selectedSize}
                     onChange={(e) => {
                       this.UpdateSelectedSize(e);
-                      console.log(state.selectedSize);
+                      this.UpdateSelectedVariant(product1);
                     }}
                     className="mt-2"
                   >
@@ -339,11 +359,14 @@ class ProductDetail extends React.Component {
                   </RadioGroup>
                 </div>
 
-                <button 
-        className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        onClick={() =>this.addVariantToCart(product1.variants[0].id, 1)}>Add to Cart</button>
-                {/* </form> */}
-
+                <button
+                  className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() =>
+                    this.addVariantToCart(state.selectedVariant.id, 1)
+                  }
+                >
+                  Add to Cart
+                </button>
                 {/* Product details */}
                 <div className="mt-10">
                   <h2 className="text-sm font-medium text-gray-900">
