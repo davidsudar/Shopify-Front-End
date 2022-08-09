@@ -4,6 +4,11 @@ import { RadioGroup } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { store } from "../store";
 import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/react/outline";
+import { useParams } from "react-router-dom";
+
+function withParams(Component) {
+  return props => <Component {...props} params={useParams()} />;
+}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -47,7 +52,6 @@ class ProductDetail extends React.Component {
   UpdateSelectedSize = (value) => {
     const state = store.getState();
     state.selectedSize = value;
-    console.log(state.selectedSize)
   };
 
   UpdateSizesStock = () => {
@@ -56,10 +60,10 @@ class ProductDetail extends React.Component {
 
   render() {
     const state = store.getState();
-
+    let { id } = this.props.params;
     let oProducts = state.products;
     const product1 = oProducts.find(
-      (element) => element.id === "gid://shopify/Product/7771227160801"
+      (element) => element.id === "gid://shopify/Product/" + id
     );
 
     const product = {
@@ -208,7 +212,6 @@ class ProductDetail extends React.Component {
             variant.selectedOptions[0].value === "Black" &&
             variant.selectedOptions[1].value === value.value
         ).available;
-console.log(value.value, inStock);
 
         sizes.push({ name: name, inStock: inStock, shopifyName: value.value });
       });
@@ -269,7 +272,6 @@ console.log(value.value, inStock);
                       sizes.forEach((size) => {
                         size.inStock = false;
                       });
-                      console.log(sizes)
                     }}
                     className="mt-2"
                   >
@@ -432,4 +434,4 @@ console.log(value.value, inStock);
   }
 }
 
-export default connect((state) => state)(ProductDetail);
+export default connect((state) => state)(withParams(ProductDetail));
