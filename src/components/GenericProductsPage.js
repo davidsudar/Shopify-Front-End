@@ -20,7 +20,14 @@ class GenericProductsPage extends React.Component {
           payload: { isCartOpen: true, checkout: res },
         });
       });
+
+      // state.client.checkout.create().then((checkout) => {
+      //   console.log(checkout); // Empty checkout
+      //   console.log(checkout.id); // The ID of the checkout. Store this for later usage.
+      // });
   }
+
+  
   render() {
     const state = store.getState(); // state from redux store
     let oProducts = (

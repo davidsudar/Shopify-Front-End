@@ -111,6 +111,8 @@ class Product extends Component {
             <p className="mt-1 text-gray-900">${variant.price}</p>
           </div>
         </div>
+        <button className="Product__buy button" onClick={() => this.props.addVariantToCart(variant.id, 1)}>Add to Cart</button>
+
         {/* figure out why flex isn't working */}
         {/* <h4 className="sr-only">Available colors</h4>
         <ul className="flex items-center justify-center space-x-3">

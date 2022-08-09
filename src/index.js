@@ -7,12 +7,16 @@ import Client from "shopify-buy";
 import { Provider } from "react-redux";
 import "./styles/shopify.css";
 import { BrowserRouter } from "react-router-dom";
-import { PersistGate } from 'redux-persist/lib/integration/react';
+// import { PersistGate } from "redux-persist/lib/integration/react";
 
 // import the two exports from the last code snippet.
-import { persistor, store } from './store';
+// import { persistor, store } from "./store";
+// import store from "./store";
+import { persistor, store } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
+
 // import your necessary custom components.
-import  LoadingView  from './components/shared/LoadingView';
+// import LoadingView from "./components/shared/LoadingView";
 
 // build shopify client
 const client = Client.buildClient({
@@ -23,9 +27,8 @@ store.dispatch({ type: "CLIENT_CREATED", payload: client });
 
 // buildClient() is synchronous, so we can call all these after!
 client.product.fetchAll().then((res) => {
-  
   store.dispatch({ type: "PRODUCTS_FOUND", payload: res });
-  console.log(res)
+  console.log(res);
 });
 client.checkout.create().then((res) => {
   store.dispatch({ type: "CHECKOUT_FOUND", payload: res });
@@ -37,12 +40,12 @@ client.shop.fetchInfo().then((res) => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-   <Provider store={store}>
-      <PersistGate loading={<LoadingView />} persistor={persistor}>
-      <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
       </PersistGate>
     </Provider>
-  </BrowserRouter>,
+  </BrowserRouter>
   // document.getElementById("root")
 );
 

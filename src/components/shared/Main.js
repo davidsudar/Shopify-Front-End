@@ -11,8 +11,7 @@ const Main = () => (
     <Route path="/sizing" element={<Sizing />}></Route>
     <Route path="/faq" element={<FAQ />}></Route>
     <Route path="/contact" element={<Contact />}></Route>
-    <Route path="/details/:id" element={<ProductDetail />}></Route>
-
+    <Route exact path="/details/:id" element={<ProductDetail/>} />
   </Routes>
 );
 

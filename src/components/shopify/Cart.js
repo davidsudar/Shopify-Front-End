@@ -48,12 +48,12 @@ class Cart extends Component {
               <span className="pricing">$ {this.props.checkout.subtotalPrice}</span>
             </div> }
           </div>
-          <div className="Cart-info clearfix">
+          {/* <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Taxes</div>
             { this.props.checkout && <div className="Cart-info__pricing">
               <span className="pricing">$ {this.props.checkout.totalTax}</span>
             </div> }
-          </div>
+          </div> */}
           <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Total</div>
             { this.props.checkout && <div className="Cart-info__pricing">
