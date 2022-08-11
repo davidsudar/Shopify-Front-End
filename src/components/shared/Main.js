@@ -3,7 +3,7 @@ import Home from "../../pages/Home";
 import FAQ from "../../pages/FAQ";
 import Contact from "../../pages/Contact";
 import Sizing from "../../pages/Sizing";
-import ProductDetail from "../../pages/test";
+import ProductDetail from "../../pages/ProductDetail";
 
 const Main = () => (
   <Routes>
