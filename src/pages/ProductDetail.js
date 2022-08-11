@@ -7,7 +7,7 @@ import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/react/outline";
 import { useParams } from "react-router-dom";
 
 function withParams(Component) {
-  return props => <Component {...props} params={useParams()} />;
+  return (props) => <Component {...props} params={useParams()} />;
 }
 
 function classNames(...classes) {
@@ -21,22 +21,26 @@ class ProductDetail extends React.Component {
   }
 
   addVariantToCart(variantId, quantity) {
-    const state = store.getState(); // state from redux store
-    const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
-    const checkoutId = state.checkout.id;
-    state.client.checkout
-      .addLineItems(checkoutId, lineItemsToAdd)
-      .then((res) => {
-        store.dispatch({
-          type: "ADD_VARIANT_TO_CART",
-          payload: { isCartOpen: true, checkout: res },
+    console.log(variantId);
+    const state = store.getState();
+    if (state.selectedVariant.available) {
+      const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
+      const checkoutId = state.checkout.id;
+      state.client.checkout
+        .addLineItems(checkoutId, lineItemsToAdd)
+        .then((res) => {
+          store.dispatch({
+            type: "ADD_VARIANT_TO_CART",
+            payload: { isCartOpen: true, checkout: res },
+          });
         });
-      });
+    }
   }
 
   UpdateSelectedColor = (value) => {
     const state = store.getState();
     state.selectedColor = value;
+    //get unique colours from all variants
   };
 
   UpdateSelectedVariant = (product) => {
@@ -65,6 +69,50 @@ class ProductDetail extends React.Component {
     const product1 = oProducts.find(
       (element) => element.id === "gid://shopify/Product/" + id
     );
+
+    //get all size for each color
+    const sizeByColor = {};
+    product1.variants.forEach((variant) => {
+      let color = variant.selectedOptions[0].value;
+      let size = variant.selectedOptions[1].value;
+      if (!sizeByColor[color]) {
+        sizeByColor[color] = [];
+      }
+      var name = "";
+      switch (size) {
+        case "Extra Extra Small":
+          name = "XXS";
+          break;
+        case "Extra Small":
+          name = "XS";
+          break;
+        case "Small":
+          name = "S";
+          break;
+        case "Medium":
+          name = "M";
+          break;
+        case "Large":
+          name = "L";
+          break;
+        case "Extra Large":
+          name = "XL";
+          break;
+        case "Double Extra Large":
+          name = "XXL";
+          break;
+        default:
+          break;
+      }
+      sizeByColor[color].push({
+        size: size,
+        name: name,
+        available: variant.available,
+      });
+    });
+    console.log(sizeByColor);
+
+    //get unique colours from all variants and match to available sizes
 
     const product = {
       name: "Basic Tee",
@@ -220,8 +268,8 @@ class ProductDetail extends React.Component {
     state.selectedVariant = product1.variants[0];
     state.selectedColor = colors[0];
     state.selectedSize = sizes[0];
-
     return (
+      
       <div className="bg-stone-300">
         <div className="pt-6 pb-16 sm:pb-24">
           <div className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -265,13 +313,16 @@ class ProductDetail extends React.Component {
                   <h2 className="text-sm font-medium text-gray-900">Color</h2>
 
                   <RadioGroup
-                    value={state.selectedColor}
+                    value={this.selectedColor}
                     onChange={(e) => {
                       this.UpdateSelectedColor(e);
                       this.UpdateSelectedVariant(product1);
                       sizes.forEach((size) => {
                         size.inStock = false;
                       });
+                      this.UpdateSelectedColor(e);
+                      this.UpdateSelectedVariant(product1);
+                      this.setState({ selectedColor: e });
                     }}
                     className="mt-2"
                   >
@@ -286,8 +337,11 @@ class ProductDetail extends React.Component {
                           className={({ active, checked }) =>
                             classNames(
                               color.selectedColor,
-                              active && checked ? "ring ring-offset-1" : "",
-                              !active && checked ? "ring-2" : "",
+                              // active && checked ? "ring ring-offset-1" : "",
+                              // !active && checked ? "ring-2" : "",
+                              // "-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none"
+                              active ? "ring ring-offset-1" : "",
+                              checked ? "ring-2" : "",
                               "-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none"
                             )
                           }
@@ -325,6 +379,7 @@ class ProductDetail extends React.Component {
                     onChange={(e) => {
                       this.UpdateSelectedSize(e);
                       this.UpdateSelectedVariant(product1);
+                      console.log(state.selectedColor)
                     }}
                     className="mt-2"
                   >
@@ -332,13 +387,13 @@ class ProductDetail extends React.Component {
                       Choose a size
                     </RadioGroup.Label>
                     <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                      {sizes.map((size) => (
+                      {sizeByColor[state.selectedColor.name].map((size) => (
                         <RadioGroup.Option
                           key={size.name}
                           value={size}
                           className={({ active, checked }) =>
                             classNames(
-                              size.inStock
+                              size.available
                                 ? "cursor-pointer focus:outline-none"
                                 : "opacity-25 cursor-not-allowed",
                               active
@@ -350,7 +405,7 @@ class ProductDetail extends React.Component {
                               "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                             )
                           }
-                          disabled={!size.inStock}
+                          disabled={!size.available}
                         >
                           <RadioGroup.Label as="span">
                             {size.name}
