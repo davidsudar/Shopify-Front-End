@@ -1,4 +1,4 @@
-import Banner from "../../Assets/banner.png"
+import Banner from "../../Assets/banner-reduced.webp"
 
 /* This example requires Tailwind CSS v2.0+ */
 
@@ -10,6 +10,7 @@ export default function Promo() {
       <div aria-hidden="true" className="absolute inset-0">
         <div className="absolute inset-0 max-w-7xl mx-auto overflow-hidden xl:px-8">
           <img
+          rel="preload"
             src={Banner}
             alt=""
             className="w-full h-full object-center object-cover"

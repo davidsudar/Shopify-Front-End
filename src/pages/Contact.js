@@ -1,88 +1,67 @@
 const Contact = () => (
-  <div className="flex max-w-lg justify-center">
-    {/* <h1>Contact Us</h1> */}
-    {/* <!-- component --> */}
-    <form >
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+  <section className="bg-stone-300 dark:bg-gray-900">
+    <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+      <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
+        Contact Us
+      </h2>
+      <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
+        If you would like to contact us regarding an order or to leave a review
+        please use the contact field below.
+      </p>
+      <form action="#" className="space-y-8">
+        <div>
           <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-first-name"
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
-            First Name
+            Your email
           </label>
           <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name"
-            type="text"
-            placeholder="Jane"
-          />
-          <p className="text-red-500 text-xs italic">Please fill out this field.</p>
-        </div>
-        <div className="w-full md:w-1/2 px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-last-name"
-          >
-            Last Name
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-last-name"
-            type="text"
-            placeholder="Doe"
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-password"
-          >
-            E-mail
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="email"
             type="email"
+            id="email"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+            placeholder="name@flowbite.com"
+            required
           />
-          <p className="text-gray-600 text-xs italic">
-            Some tips - as long as needed
-          </p>
         </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
+        <div>
           <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-password"
+            htmlFor="subject"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
-            Message
+            Subject
+          </label>
+          <input
+            type="text"
+            id="subject"
+            className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+            placeholder="Let us know how we can help you"
+            required
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label
+            htmlFor="message"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+          >
+            Your message
           </label>
           <textarea
-            className=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
             id="message"
+            rows="6"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Leave a comment..."
           ></textarea>
-          <p className="text-gray-600 text-xs italic">
-            Re-size can be disabled by set by resize-none / resize-y / resize-x
-            / resize
-          </p>
         </div>
-      </div>
-      <div className="md:flex md:items-center">
-        <div className="md:w-1/3">
-          <button
-            className="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button"
+        <button
+          type="submit"
+          className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Send
-          </button>
-        </div>
-        <div className="md:w-2/3"></div>
-      </div>
-    </form>
-  </div>
+          Send message
+        </button>
+      </form>
+    </div>
+  </section>
 );
 
 export default Contact;
